@@ -74,5 +74,25 @@ router.put('/:id', (req, res, next) => {
 });
 
 /* DELETE delete a user */
+router.delete('/:id', (req, res, next) => {
+  const userId = parseInt(req.params.id);
+
+  if (!userId || userId <= 0) {
+    res.status(400).send('Invalide ID');
+    return;
+  }
+
+  User.destroy({
+    where: {
+      id: userId,
+    },
+  })
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(() => {
+      res.status(400).send();
+    });
+});
 
 module.exports = router;
