@@ -28,7 +28,7 @@ app.use(async (req, res, next) => {
   if (!header) {
     return next();
   }
-
+  // spliting token in half and assigning second part to token
   const token = header.split(' ')[1];
 
   // validate token / get user

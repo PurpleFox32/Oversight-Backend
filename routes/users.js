@@ -33,14 +33,18 @@ router.get('/:id', (req, res, next) => {
   );
 });
 
+//---------------------------------------------------------
+
 /* POST Register user and create a user */
 router.post('/', async (req, res, next) => {
+  // verifing user&password do not equal null
   if (!req.body.username || !req.body.password) {
     res.status(400).send('Username and Password Required');
     return;
   }
-
   // hash the password
+  // salt = the number of times the encryption runs
+  // higher the salt number the greater the encrytion
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -51,14 +55,43 @@ router.post('/', async (req, res, next) => {
   })
     .then((newUser) => {
       res.json({
+        //only returning userid & username
         id: newUser.id,
         username: newUser.username,
       });
     })
     .catch(() => {
-      res.status(400).send();
+      res.status(400).send('User Created');
     });
 });
+
+// POST Login
+router.post('/login', async (req, res, next) => {
+  User.findOne({
+    where: {
+      username: req.body.username,
+    },
+  }).then(async (user) => {
+    // check if user exists
+    if (!user) {
+      res.status(404).send('Invalid Username');
+      return;
+    }
+    // check the password
+    // compare returs a boolean
+    const valid = await bcrypt.compare(req.body.password, user.password);
+
+    if (valid) {
+      // create the token
+      const jwt = auth.createJWT(user);
+      res.status(200).send({ jwt });
+    } else {
+      res.status(401).send('Invalid Password');
+    }
+  });
+});
+
+//-----------------------------------------------------------
 
 /* PUT update a user */
 router.put('/:id', (req, res, next) => {
@@ -68,12 +101,6 @@ router.put('/:id', (req, res, next) => {
     res.status(400).send('Invalid ID');
     return;
   }
-
-  // get the user from jwt
-
-  // get the post already from database
-
-  // compare the user's userid to the token user id
 
   User.update(
     {
@@ -113,31 +140,6 @@ router.delete('/:id', (req, res, next) => {
     .catch(() => {
       res.status(400).send();
     });
-});
-
-// POST SingIn
-router.post('/login', async (req, res, next) => {
-  User.findOne({
-    where: {
-      username: req.body.username,
-    },
-  }).then(async (user) => {
-    // check if user exists
-    if (!user) {
-      res.status(404).send('Invalide username');
-      return;
-    }
-    // check the password
-    const valid = await bcrypt.compare(req.body.password, user.password);
-
-    if (valid) {
-      // create the token
-      const jwt = auth.createJWT(user);
-      res.status(200).send({ jwt });
-    } else {
-      res.status(401).send('Invalid Password');
-    }
-  });
 });
 
 module.exports = router;

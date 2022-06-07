@@ -3,6 +3,7 @@ const { User } = require('../models');
 
 const secretKey = 'password123';
 
+// using jwt to create a JWT token
 module.exports = {
   createJWT: (user) => {
     const token = jwt.sign(
