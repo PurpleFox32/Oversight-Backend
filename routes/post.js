@@ -3,28 +3,6 @@ var router = express.Router();
 const { Post } = require('../models');
 var auth = require('../services/auth');
 
-/* GET /:id get individual post */
-router.get('/:id', (req, res, next) => {
-  const postId = parseInt(req.params.id);
-
-  Post.findOne({
-    where: {
-      id: postId,
-    },
-  }).then(
-    (thePost) => {
-      if (thePost) {
-        res.json(thePost);
-      } else {
-        res.status(404).send();
-      }
-    },
-    (err) => {
-      res.status(500).send(err);
-    }
-  );
-});
-
 /* POST create a post */
 router.post('/', async (req, res, next) => {
   // validate token / get user
@@ -46,6 +24,37 @@ router.post('/', async (req, res, next) => {
     .catch(() => {
       res.status(400).send();
     });
+});
+
+/* PUT update a post */
+
+// get the user from jwt
+
+// get the post already from database
+
+// compare the user's userid to the token user id
+
+//--------------------------------------------------
+/* GET /:id get individual post */
+router.get('/:id', (req, res, next) => {
+  const postId = parseInt(req.params.id);
+
+  Post.findOne({
+    where: {
+      id: postId,
+    },
+  }).then(
+    (thePost) => {
+      if (thePost) {
+        res.json(thePost);
+      } else {
+        res.status(404).send();
+      }
+    },
+    (err) => {
+      res.status(500).send(err);
+    }
+  );
 });
 
 module.exports = router;
