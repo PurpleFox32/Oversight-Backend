@@ -61,7 +61,7 @@ router.post('/', async (req, res, next) => {
       });
     })
     .catch(() => {
-      res.status(400).send('User Created');
+      res.status(400).send('User Not Created');
     });
 });
 
@@ -84,7 +84,7 @@ router.post('/login', async (req, res, next) => {
     if (valid) {
       // create the token
       const jwt = auth.createJWT(user);
-      res.status(200).send({ jwt });
+      res.status(200).send({ jwt, user });
     } else {
       res.status(401).send('Invalid Password');
     }
