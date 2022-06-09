@@ -11,6 +11,9 @@ var postRouter = require('./routes/post');
 
 var app = express();
 
+// var server = app.listen(3001, () => {
+//   console.log('Server is started on 127.0.0.1:' + 3001);
+// });
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

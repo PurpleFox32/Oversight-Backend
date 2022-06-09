@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Post } = require('../models');
+const { Post, User } = require('../models');
 var auth = require('../services/auth');
 
 /* POST create a post */
@@ -43,6 +43,7 @@ router.get('/:id', (req, res, next) => {
     where: {
       id: postId,
     },
+    include: User,
   }).then(
     (thePost) => {
       if (thePost) {
