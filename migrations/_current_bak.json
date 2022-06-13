@@ -1,0 +1,114 @@
+{
+    "tables": {
+        "games": {
+            "tableName": "games",
+            "schema": {
+                "GameId": {
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "GameId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "Name": {
+                    "field": "Name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "Description": {
+                    "field": "Description",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Posts": {
+            "tableName": "Posts",
+            "schema": {
+                "post_id": {
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "post_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "post": {
+                    "field": "post",
+                    "seqType": "Sequelize.STRING"
+                },
+                "UserUserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "user_id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "UserUserId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "user_id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Reviews": {
+            "tableName": "Reviews",
+            "schema": {
+                "review_id": {
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "review_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "review": {
+                    "field": "review",
+                    "seqType": "Sequelize.STRING"
+                },
+                "rating": {
+                    "field": "rating",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Users": {
+            "tableName": "Users",
+            "schema": {
+                "user_id": {
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "user_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "username": {
+                    "allowNull": false,
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "allowNull": false,
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "allowNull": false,
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}
