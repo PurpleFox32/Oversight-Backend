@@ -24,21 +24,21 @@ models.sequelize.sync({ alter: true }).then(function () {
   console.log("DB Sync'd up");
 });
 
-app.use(async (req, res, next) => {
-  // get token from the request
-  const header = req.headers.authorization;
+// app.use(async (req, res, next) => {
+//   // get token from the request
+//   const header = req.headers.authorization;
 
-  if (!header) {
-    return next();
-  }
-  // spliting token in half and assigning second part to token
-  const token = header.split(' ')[1];
+//   if (!header) {
+//     return next();
+//   }
+//   // spliting token in half and assigning second part to token
+//   const token = header.split(' ')[1];
 
-  // validate token / get user
-  const user = await auth.verifyUser(token);
-  req.user = user;
-  next();
-});
+//   // validate token / get user
+//   const user = await auth.verifyUser(token);
+//   req.user = user;
+//   next();
+// });
 
 app.use('/users', usersRouter);
 app.use('/post', postRouter);
