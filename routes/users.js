@@ -51,7 +51,8 @@ router.post('/', async (req, res, next) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: hashedPassword,
+    // password: hashedPassword,
+    password: auth.hashPassword(req.body.password),
   })
     .then((newUser) => {
       res.json({
@@ -89,6 +90,16 @@ router.post('/login', async (req, res, next) => {
       res.status(401).send('Invalid Password');
     }
   });
+});
+
+router.get('/profile/:token', (req, res) => {
+  let token = req.params.token;
+
+  if (token) {
+    auth.verifyUser(token).then((user) => {
+      // make a find one in the models
+    });
+  }
 });
 
 //-----------------------------------------------------------
