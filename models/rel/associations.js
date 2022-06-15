@@ -47,5 +47,4 @@ module.exports = function (models) {
         through: models.reviews,
         foreignKey: 'post_id'
     });
-    
 }
