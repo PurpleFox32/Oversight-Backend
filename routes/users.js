@@ -36,7 +36,7 @@ router.get('/:id', (req, res, next) => {
 //---------------------------------------------------------
 
 /* POST Register user and create a user */
-router.post('/', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   // verifing user&password do not equal null
   if (!req.body.username || !req.body.password) {
     res.status(400).send('Username and Password Required');
