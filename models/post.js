@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       post: DataTypes.STRING,
     },

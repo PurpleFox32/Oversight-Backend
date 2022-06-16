@@ -3,6 +3,9 @@ var router = express.Router();
 const { User } = require('../models');
 var bcrypt = require('bcrypt');
 var auth = require('../services/auth');
+let cors = require('cors');
+
+router.use(cors());
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -45,8 +48,8 @@ router.post('/signup', async (req, res, next) => {
   // hash the password
   // salt = the number of times the encryption runs
   // higher the salt number the greater the encrytion
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   User.create({
     username: req.body.username,
@@ -57,47 +60,69 @@ router.post('/signup', async (req, res, next) => {
     .then((newUser) => {
       res.json({
         //only returning userid & username
-        id: newUser.id,
+        id: newUser.user_id,
         username: newUser.username,
       });
     })
-    .catch(() => {
-      res.status(400).send('User Not Created');
+    .catch((err) => {
+      res.status(400).send(err);
     });
 });
 
 // POST Login
 router.post('/login', async (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
   User.findOne({
     where: {
       username: req.body.username,
     },
-  }).then(async (user) => {
+  }).then((user) => {
     // check if user exists
+    //  console.log(user);
     if (!user) {
       res.status(404).send('Invalid Username');
       return;
-    }
-    // check the password
-    // compare returs a boolean
-    const valid = await bcrypt.compare(req.body.password, user.password);
-
-    if (valid) {
-      // create the token
-      const jwt = auth.createJWT(user);
-      res.status(200).send({ jwt, user });
     } else {
-      res.status(401).send('Invalid Password');
+      let passwordMatch = auth.comparePasswords(
+        req.body.password,
+        user.dataValues.password
+      );
+
+      if (passwordMatch) {
+        let token = auth.signUser(user);
+
+        res.json(token);
+      }
     }
+    // // check the password
+    // // compare returs a boolean
+    // const valid = await bcrypt.compare(req.body.password, user.password);
+
+    // if (valid) {
+    //   // create the token
+    //   const jwt = auth.createJWT(user);
+    //   res.status(200).send({ jwt, user });
+    // } else {
+    //   res.status(401).send('Invalid Password');
+    // }
   });
 });
 
-router.get('/profile/:token', (req, res) => {
-  let token = req.params.token;
+router.post('/profile', (req, res) => {
+  let token = req.body.token;
+  console.log(token);
+  res.json('hi');
+
+  // if (token) {
+  //   auth.verifyUser(token).then((user) => {
+  //     // make a find one in the models
+  //   });
+  // }
 
   if (token) {
-    auth.verifyUser(token).then((user) => {
-      // make a find one in the models
+    auth.varifyUser2(token).then((user) => {
+      // console.log(user);
     });
   }
 });
