@@ -34,7 +34,8 @@ router.get('/search/:query', (req, res, next) => {
   games
     .findAll({
       where: {
-        Name: req.params.query,
+        //Name: req.params.query,
+        [Op.or]: [{ Name: { [Op.like]: '%' + req.params.query + '%' } }],
       },
     })
     .then(
