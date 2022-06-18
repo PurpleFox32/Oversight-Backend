@@ -51,11 +51,13 @@ router.post('/signup', async (req, res, next) => {
   // const salt = await bcrypt.genSalt(10);
   // const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    // password: hashedPassword,
-    password: auth.hashPassword(req.body.password),
+  User.findOrCreate({
+    where: { username: req.body.username },
+    defaults: {
+      email: req.body.email,
+      // password: hashedPassword,
+      password: auth.hashPassword(req.body.password),
+    },
   })
     .then((newUser) => {
       res.json({
