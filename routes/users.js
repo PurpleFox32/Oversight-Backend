@@ -95,7 +95,7 @@ router.post('/login', async (req, res, next) => {
         res.json(token);
       }
     }
-    // // check the password
+    // check the password
     // // compare returs a boolean
     // const valid = await bcrypt.compare(req.body.password, user.password);
 
