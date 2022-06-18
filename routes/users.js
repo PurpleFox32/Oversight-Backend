@@ -81,9 +81,8 @@ router.post('/login', async (req, res, next) => {
     },
   }).then((user) => {
     // check if user exists
-    //  console.log(user);
     if (!user) {
-      res.status(404).send('Invalid Username');
+      res.status(404).send('Login failed');
       return;
     } else {
       let passwordMatch = auth.comparePasswords(
@@ -93,11 +92,10 @@ router.post('/login', async (req, res, next) => {
 
       if (passwordMatch) {
         let token = auth.signUser(user);
-
         res.json(token);
       }
     }
-    // // check the password
+    // check the password
     // // compare returs a boolean
     // const valid = await bcrypt.compare(req.body.password, user.password);
 
