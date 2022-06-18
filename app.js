@@ -12,9 +12,6 @@ var gamesRouter = require('./routes/games');
 
 var app = express();
 
-// var server = app.listen(3001, () => {
-//   console.log('Server is started on 127.0.0.1:' + 3001);
-// });
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,24 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 models.sequelize.sync().then(function () {
   console.log("DB Sync'd up");
 });
-
-// { alter: true }
-
-// app.use(async (req, res, next) => {
-//   // get token from the request
-//   const header = req.headers.authorization;
-
-//   if (!header) {
-//     return next();
-//   }
-//   // spliting token in half and assigning second part to token
-//   const token = header.split(' ')[1];
-
-//   // validate token / get user
-//   const user = await auth.verifyUser(token);
-//   req.user = user;
-//   next();
-// });
 
 app.use('/users', usersRouter);
 app.use('/post', postRouter);
