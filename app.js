@@ -5,7 +5,6 @@ var logger = require('morgan');
 var models = require('./models');
 var auth = require('./services/auth');
 
-//var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/post');
 var gamesRouter = require('./routes/games');
