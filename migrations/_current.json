@@ -10,6 +10,10 @@
                     "field": "GameId",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "GameThumbnail": {
+                    "field": "GameThumbnail",
+                    "seqType": "Sequelize.STRING"
+                },
                 "Name": {
                     "field": "Name",
                     "seqType": "Sequelize.STRING"
@@ -17,6 +21,16 @@
                 "Description": {
                     "field": "Description",
                     "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -34,6 +48,16 @@
                 "post": {
                     "field": "post",
                     "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
                 },
                 "UserUserId": {
                     "allowNull": true,
@@ -77,6 +101,16 @@
                 "rating": {
                     "field": "rating",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -112,10 +146,20 @@
                     },
                     "field": "admin",
                     "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }

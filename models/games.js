@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    GameThumbnail: DataTypes.STRING,
     Name: DataTypes.STRING,
     Description: DataTypes.STRING
   }, {
