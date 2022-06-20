@@ -105,10 +105,17 @@
                     "allowNull": false,
                     "field": "password",
                     "seqType": "Sequelize.STRING"
+                },
+                "admin": {
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "admin",
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 2
 }
