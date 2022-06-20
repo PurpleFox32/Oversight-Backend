@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Purple_Fox_32",
+    "password": "Password1!",
     "database": "oversightdb",
     "host": "127.0.0.1",
     "dialect": "mysql"
