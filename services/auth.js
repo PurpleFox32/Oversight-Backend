@@ -11,7 +11,6 @@ module.exports = {
     return User.findByPk(decodedPayload.id);
   },
   signUser: function (user) {
-    console.log(user);
     const token = jwt.sign(
       {
         username: user.username,
@@ -24,11 +23,10 @@ module.exports = {
     );
     return token;
   },
-  varifyUser2: function (token) {
+  verifyUser2: function (token) {
     try {
       let decoded = jwt.verify(token, 'secretKey');
-      console.log(decoded);
-      console.log('hello');
+
       return User.findByPk(decoded.user_id);
     } catch (err) {
       console.log(err);

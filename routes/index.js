@@ -3,10 +3,10 @@ var router = express.Router();
 var models = require('../models');
 
 /* GET home page. */
-router.get('/test', function (req, res, next) {
-  models.User.findAll({}).then((response) => {
-    res.json(response);
-  });
+router.get('/logout', function (req, res, next) {
+  console.log('hello');
+  res.cookie('jwt', '', { expires: new Date(0) });
+  res.json('logout successful');
 });
 
 module.exports = router;
