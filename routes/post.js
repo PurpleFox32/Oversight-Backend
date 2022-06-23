@@ -4,26 +4,34 @@ const { Post, User } = require('../models');
 var auth = require('../services/auth');
 
 /* POST create a post */
-router.post('/', async (req, res, next) => {
+router.post('/:token', async (req, res, next) => {
   // validate token / get user
-  const user = req.user;
+  //const user = req.user;
 
-  if (!user) {
-    res.status(403).send();
-    return;
-  }
+  let token = req.params.token;
+  if (token) {
+    auth.verifyUser2(token).then((user) => {
+      //make a find one in the models
+      // console.log(user);
 
-  // create a post with the userid
-  Post.create({
-    post: req.body.post,
-    UserId: user.id,
-  })
-    .then((newPost) => {
-      res.json(newPost);
-    })
-    .catch(() => {
-      res.status(400).send();
+      if (!user) {
+        res.status(403).send();
+        return;
+      }
+
+      // create a post with the userid
+      Post.create({
+        post: req.body.body,
+        UserId: user.id,
+      })
+        .then((newPost) => {
+          res.json(newPost);
+        })
+        .catch(() => {
+          res.status(400).send();
+        });
     });
+  }
 });
 
 /* PUT update a post */
