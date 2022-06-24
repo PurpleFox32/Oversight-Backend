@@ -49,7 +49,7 @@ router.get('/:id', (req, res, next) => {
 
   Post.findOne({
     where: {
-      id: postId,
+      post_id: postId,
     },
     include: User,
   }).then(
