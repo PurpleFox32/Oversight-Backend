@@ -22,7 +22,7 @@ router.post('/:token', async (req, res, next) => {
       // create a post with the userid
       Post.create({
         post: req.body.body,
-        UserId: user.id,
+        UserUserId: user.user_id,
       })
         .then((newPost) => {
           res.json(newPost);
