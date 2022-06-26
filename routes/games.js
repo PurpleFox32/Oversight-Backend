@@ -3,31 +3,15 @@ var router = express.Router();
 const { Post, User, games } = require('../models');
 var auth = require('../services/auth');
 
-//--------------------------------------------------
-/* GET /:id get individual post */
-router.get('/:id', (req, res, next) => {
-  const postId = parseInt(req.params.id);
-
-  Post.findOne({
-    where: {
-      id: postId,
-    },
-    include: User,
-  }).then(
-    (thePost) => {
-      if (thePost) {
-        res.json(thePost);
-      } else {
-        res.status(404).send();
-      }
-    },
-    (err) => {
-      res.status(500).send(err);
-    }
-  );
+router.get('/games', function (req, res, next) {
+  User.findAll().then(games => {
+    res.json(games);
+  });
 });
 
-// GET all
+// //--------------------------------------------------
+
+// Search
 router.get('/search/:query', (req, res, next) => {
   const postId = parseInt(req.params.id);
 
@@ -52,22 +36,10 @@ router.get('/search/:query', (req, res, next) => {
     );
 });
 
-// GET all
-router.get('/', (req, res, next) => {
-  const postId = parseInt(req.params.id);
-
-  games.findAll().then(
-    (rows) => {
-      if (rows) {
-        res.json(rows);
-      } else {
-        res.status(404).send();
-      }
-    },
-    (err) => {
-      res.status(500).send(err);
-    }
-  );
+router.get('/list', (req, res, next) => {
+  games.findAll().then(games => {
+    res.json(games);
+  });
 });
 
 module.exports = router;
