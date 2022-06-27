@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const { Post, User, games } = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 var auth = require('../services/auth');
 
 router.get('/games', function (req, res, next) {
-  User.findAll().then(games => {
+  User.findAll().then((games) => {
     res.json(games);
   });
 });
@@ -13,8 +16,6 @@ router.get('/games', function (req, res, next) {
 
 // Search
 router.get('/search/:query', (req, res, next) => {
-  const postId = parseInt(req.params.id);
-
   games
     .findAll({
       where: {
@@ -37,7 +38,7 @@ router.get('/search/:query', (req, res, next) => {
 });
 
 router.get('/list', (req, res, next) => {
-  games.findAll().then(games => {
+  games.findAll().then((games) => {
     res.json(games);
   });
 });
