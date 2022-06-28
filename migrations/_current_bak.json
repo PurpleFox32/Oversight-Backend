@@ -49,10 +49,6 @@
                     "field": "post",
                     "seqType": "Sequelize.STRING"
                 },
-                "gameId": {
-                    "field": "gameId",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -169,5 +165,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }
