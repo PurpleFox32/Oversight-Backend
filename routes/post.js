@@ -4,11 +4,11 @@ const { Post, User } = require('../models');
 var auth = require('../services/auth');
 
 /* POST create a post */
-router.post('/:token', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
   // validate token / get user
   //const user = req.user;
 
-  let token = req.params.token;
+  let token = req.localStorage.token;
   if (token) {
     auth.verifyUser2(token).then((user) => {
       //make a find one in the models
@@ -23,6 +23,7 @@ router.post('/:token', async (req, res, next) => {
       Post.create({
         post: req.body.body,
         UserUserId: user.user_id,
+        postGameId: req.params.id
       })
         .then((newPost) => {
           res.json(newPost);
