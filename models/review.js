@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    postGameId: DataTypes.INTEGER,
     review: DataTypes.STRING,
     rating: DataTypes.INTEGER
   }, {

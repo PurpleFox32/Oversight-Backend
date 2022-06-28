@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       post: DataTypes.STRING,
+      gameId: DataTypes.INTEGER
     },
     {
       sequelize,
