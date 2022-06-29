@@ -45,10 +45,10 @@ router.post('/create/:id', async (req, res, next) => {
 
   // create a post with the userid
   Post.create({
-    post: req.body.body,
+    post: req.body.post,
     //   UserUserId: user.user_id,
     //   postGameId: req.params.id,
-    GameId: req.params.GameId,
+    GameId: req.params.id,
   })
     .then((newPost) => {
       res.json(newPost);

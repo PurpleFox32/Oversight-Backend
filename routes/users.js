@@ -103,7 +103,7 @@ router.get('/profile/:token', function (req, res) {
       if (user) {
         User.findAll({
           where: { user_id: user.dataValues.user_id },
-          include: [{ model: models.Post }],
+          //include: [{ model: models.Post }],
         }).then((response) => {
           console.log(response[0]);
           res.json(response[0]);

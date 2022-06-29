@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-models.sequelize.sync({ force: true }).then(function () {
+models.sequelize.sync().then(function () {
   console.log("DB Sync'd up");
 });
 
@@ -30,3 +30,5 @@ app.use('/games', gamesRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
+
+// { force: true }
