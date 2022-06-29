@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({ force: true }).then(function () {
   console.log("DB Sync'd up");
 });
 

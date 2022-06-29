@@ -23,7 +23,7 @@ router.post('/:id', async (req, res, next) => {
       Post.create({
         post: req.body.body,
         UserUserId: user.user_id,
-        postGameId: req.params.id
+        postGameId: req.params.id,
       })
         .then((newPost) => {
           res.json(newPost);
@@ -35,13 +35,28 @@ router.post('/:id', async (req, res, next) => {
   }
 });
 
-/* PUT update a post */
+/* POST create a post */
+router.post('/create/:id', async (req, res, next) => {
+  // validate token / get user
+  //const user = req.user;
 
-// get the user from jwt
+  console.log(req.body);
+  console.log(req.params.id);
 
-// get the post already from database
-
-// compare the user's userid to the token user id
+  // create a post with the userid
+  Post.create({
+    post: req.body.body,
+    //   UserUserId: user.user_id,
+    //   postGameId: req.params.id,
+    GameId: req.params.GameId,
+  })
+    .then((newPost) => {
+      res.json(newPost);
+    })
+    .catch(() => {
+      res.status(400).send();
+    });
+});
 
 //--------------------------------------------------
 /* GET /:id get individual post */

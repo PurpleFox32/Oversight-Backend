@@ -49,6 +49,10 @@
                     "field": "post",
                     "seqType": "Sequelize.STRING"
                 },
+                "gameId": {
+                    "field": "gameId",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -58,6 +62,17 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "GameId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "games",
+                        "key": "GameId"
+                    },
+                    "onDelete": "cascade",
+                    "onUpdate": "CASCADE",
+                    "field": "GameId",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "UserUserId": {
                     "allowNull": true,
@@ -165,5 +180,5 @@
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 3
 }

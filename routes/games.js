@@ -43,4 +43,28 @@ router.get('/list', (req, res, next) => {
   });
 });
 
+router.get('/:id', (req, res, next) => {
+  const gameId = parseInt(req.params.id);
+
+  games
+    .findOne({
+      where: {
+        GameId: gameId,
+      },
+      include: [Post],
+    })
+    .then(
+      (theGame) => {
+        if (theGame) {
+          res.json(theGame);
+        } else {
+          res.status(404).send();
+        }
+      },
+      (err) => {
+        res.status(500).send(err);
+      }
+    );
+});
+
 module.exports = router;
