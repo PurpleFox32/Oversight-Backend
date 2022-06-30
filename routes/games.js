@@ -67,4 +67,21 @@ router.get('/:id', (req, res, next) => {
     );
 });
 
+//Get posts by game ID
+router.get('/:id', (req, res, next) => {
+  const gameIdParam = parseInt(req.params.id);
+
+  Post.findAll({
+    where: {
+      gameId: gameIdParam
+    }
+  })
+    .then(
+      (posts) => {
+        console.log(posts);
+        return posts
+      }
+    )
+})
+
 module.exports = router;
