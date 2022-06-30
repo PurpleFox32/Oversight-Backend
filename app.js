@@ -30,3 +30,5 @@ app.use('/games', gamesRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
+
+// { force: true }
