@@ -52,7 +52,6 @@ router.post('/signup', async (req, res, next) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    // password: hashedPassword,
     password: auth.hashPassword(req.body.password),
   })
     .then((newUser) => {
@@ -80,7 +79,7 @@ router.post('/login', async (req, res, next) => {
       return;
     }
     // check the password
-    // compare returs a boolean
+    // compare returns a boolean
     const valid = await bcrypt.compare(req.body.password, user.password);
 
     if (valid) {
@@ -103,7 +102,6 @@ router.get('/profile/:token', function (req, res) {
       if (user) {
         User.findAll({
           where: { user_id: user.dataValues.user_id },
-          //include: [{ model: models.Post }],
         }).then((response) => {
           console.log(response[0]);
           res.json(response[0]);
