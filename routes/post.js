@@ -59,27 +59,5 @@ router.post('/create/:id', async (req, res, next) => {
 });
 
 //--------------------------------------------------
-/* GET /:id get individual post */
-router.get('/:id', (req, res, next) => {
-  const postId = parseInt(req.params.id);
-
-  Post.findOne({
-    where: {
-      post_id: postId,
-    },
-    include: User,
-  }).then(
-    (thePost) => {
-      if (thePost) {
-        res.json(thePost);
-      } else {
-        res.status(404).send();
-      }
-    },
-    (err) => {
-      res.status(500).send(err);
-    }
-  );
-});
 
 module.exports = router;

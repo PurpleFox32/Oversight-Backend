@@ -79,9 +79,9 @@ router.get('/:id', (req, res, next) => {
     .then(
       (posts) => {
         console.log(posts);
-        return posts
+        return posts;
       }
     )
-})
+});
 
 module.exports = router;
