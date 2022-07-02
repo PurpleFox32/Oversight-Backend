@@ -92,8 +92,8 @@ router.post('/login', async (req, res, next) => {
   });
 });
 
-router.get('/profile/:token', function (req, res) {
-  let token = req.params.token;
+router.get('/profile', function (req, res) {
+  let token = req.localstorage.token;
   if (token) {
     auth.verifyUser2(token).then((user) => {
       // make a find one in the models
@@ -110,6 +110,17 @@ router.get('/profile/:token', function (req, res) {
     });
   }
 });
+
+router.get('/profile/:id', function (req, res, next) {
+  User.findOne({
+    where: {
+      user_id: req.params.id
+    }
+  }).then(response => {
+    console.log(response);
+    res.json(response);
+  })
+})
 
 //-----------------------------------------------------------
 
