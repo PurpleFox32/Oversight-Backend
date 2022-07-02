@@ -111,6 +111,7 @@ router.get('/profile', function (req, res) {
   }
 });
 
+//Get Single User Information
 router.get('/profile/:id', function (req, res, next) {
   User.findOne({
     where: {
